@@ -503,7 +503,11 @@ public abstract class Enchantment implements Cloneable {
     }
 
     public String getName() {
-        return "%enchantment." + this.name;
+        if (this.identifier == null) {
+            return "%enchantment." + this.name;
+        } else {
+            return this.name;
+        }
     }
 
     public String getOriginalName() {

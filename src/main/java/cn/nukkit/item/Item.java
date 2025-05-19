@@ -1600,7 +1600,7 @@ public class Item implements Cloneable, BlockID, ItemID, ItemNamespaceId, Protoc
             }
         }
         if (!custom_ench.isEmpty()) {
-            var customName = setCustomEnchantDisplay(custom_ench);
+            var customName = getCustomEnchantmentDisplay(custom_ench);
             if (tag.contains("display") && tag.get("display") instanceof CompoundTag) {
                 tag.getCompound("display").putString("Name", customName);
             } else {
@@ -1612,10 +1612,24 @@ public class Item implements Cloneable, BlockID, ItemID, ItemNamespaceId, Protoc
         this.setNamedTag(tag);
     }
 
-    private String setCustomEnchantDisplay(ListTag<CompoundTag> custom_ench) {
-        StringJoiner joiner = new StringJoiner("\n", String.valueOf(TextFormat.RESET) + TextFormat.AQUA + idConvertToName() + "\n", "");
-        for (var ench : custom_ench.getAll()) {
-            var enchantment = Enchantment.getEnchantment(ench.getString("id")).setLevel(ench.getShort("lvl"));
+    private String getCustomEnchantmentDisplay(ListTag<CompoundTag> customEnchantments) {
+        StringJoiner joiner = new StringJoiner("\n");
+
+        String originalName;
+        if (this.hasSavedCustomName()) {
+            originalName = this.getSavedCustomName();
+        } else {
+            if (this.isTool() && !(this instanceof CustomItem)) {
+                originalName = "%item." + this.getNamespaceId().split(":")[1] + ".name";
+            } else {
+                originalName = this.idConvertToName();
+            }
+        }
+
+        joiner.add(TextFormat.RESET.toString() + TextFormat.AQUA + originalName + TextFormat.RESET);
+
+        for (var enchant : customEnchantments.getAll()) {
+            var enchantment = Enchantment.getEnchantment(enchant.getString("id")).setLevel(enchant.getShort("lvl"));
             joiner.add(enchantment.getLore());
         }
         return joiner.toString();
@@ -1665,6 +1679,22 @@ public class Item implements Cloneable, BlockID, ItemID, ItemNamespaceId, Protoc
         return false;
     }
 
+    public boolean hasSavedCustomName() {
+        if (!this.hasCompoundTag()) {
+            return false;
+        }
+
+        CompoundTag tag = this.getNamedTag();
+        if (tag.contains("display")) {
+            Tag display = tag.get("display");
+            return display instanceof CompoundTag compound &&
+                    compound.contains("SavedName") &&
+                    compound.get("SavedName") instanceof StringTag;
+        }
+
+        return false;
+    }
+
     public String getCustomName() {
         if (!this.hasCompoundTag()) {
             return "";
@@ -1675,6 +1705,24 @@ public class Item implements Cloneable, BlockID, ItemID, ItemNamespaceId, Protoc
             Tag tag1 = tag.get("display");
             if (tag1 instanceof CompoundTag && ((CompoundTag) tag1).contains("Name") && ((CompoundTag) tag1).get("Name") instanceof StringTag) {
                 return ((CompoundTag) tag1).getString("Name");
+            }
+        }
+
+        return "";
+    }
+
+    public String getSavedCustomName() {
+        if (!this.hasCompoundTag()) {
+            return "";
+        }
+
+        CompoundTag tag = this.getNamedTag();
+        if (tag.contains("display")) {
+            Tag display = tag.get("display");
+            if (display instanceof CompoundTag compound &&
+                    compound.contains("SavedName") &&
+                    compound.get("SavedName") instanceof StringTag) {
+                return compound.getString("SavedName");
             }
         }
 
@@ -1698,10 +1746,13 @@ public class Item implements Cloneable, BlockID, ItemID, ItemNamespaceId, Protoc
             tag = this.getNamedTag();
         }
         if (tag.contains("display") && tag.get("display") instanceof CompoundTag) {
-            tag.getCompound("display").putString("Name", name);
+            tag.getCompound("display")
+                    .putString("Name", name)
+                    .putString("SavedName", name);
         } else {
             tag.putCompound("display", new CompoundTag("display")
                     .putString("Name", name)
+                    .putString("SavedName", name)
             );
         }
         this.setNamedTag(tag);
