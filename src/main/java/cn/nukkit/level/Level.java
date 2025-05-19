@@ -1949,7 +1949,13 @@ public class Level implements ChunkManager, Metadatable {
             fullState = new int[]{0, 0};
         }
 
-        return Block.get(fullState[0], fullState[1], this, x, y, z, layer);
+        Block block = Block.get(fullState[0], fullState[1]);
+        block.x = x;
+        block.y = y;
+        block.z = z;
+        block.level = this;
+        block.layer = layer;
+        return block;
     }
 
     public synchronized void updateAllLight(Vector3 pos) {
