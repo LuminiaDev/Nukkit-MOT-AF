@@ -47,15 +47,14 @@ public class MobEquipmentProcessor extends DataPacketProcessor<MobEquipmentPacke
 
         Item item = inv.getItem(pk.hotbarSlot);
 
-        if (!item.equals(pk.item)) {
-            player.getServer().getLogger().debug(player.getName() + " tried to equip " + pk.item + " but have " + item + " in target slot");
-            playerHandle.setFailedMobEquipmentPacket(playerHandle.getFailedMobEquipmentPacket() + 1);
-            if (playerHandle.getFailedMobEquipmentPacket() > MAX_FAILED) {
-                log.warn("{} Too many failed MobEquipmentPacket", player.getName());
-                player.close("", "Too many failed packets");
+        if (!item.equals(pk.item, false, true)) {
+            Item fixItem = Item.get(item.getId(), item.getDamage(), item.getCount(), item.getCompoundTag());
+            if (fixItem.equals(pk.item, false, true)) {
+                inv.setItem(pk.hotbarSlot, fixItem);
+            } else {
+                log.debug("Tried to equip {} but have {} in target slot", pk.item, fixItem);
+                inv.sendContents(player);
             }
-            inv.sendContents(player);
-            return;
         }
 
         if (inv instanceof PlayerInventory) {
