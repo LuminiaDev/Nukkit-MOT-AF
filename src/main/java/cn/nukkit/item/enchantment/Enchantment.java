@@ -26,10 +26,7 @@ import cn.nukkit.item.enchantment.trident.EnchantmentTridentChanneling;
 import cn.nukkit.item.enchantment.trident.EnchantmentTridentImpaling;
 import cn.nukkit.item.enchantment.trident.EnchantmentTridentLoyalty;
 import cn.nukkit.item.enchantment.trident.EnchantmentTridentRiptide;
-import cn.nukkit.utils.DynamicClassLoader;
-import cn.nukkit.utils.Identifier;
-import cn.nukkit.utils.OK;
-import cn.nukkit.utils.Utils;
+import cn.nukkit.utils.*;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import org.jetbrains.annotations.NotNull;
 import org.objectweb.asm.ClassWriter;
@@ -418,6 +415,10 @@ public abstract class Enchantment implements Cloneable {
     @Nullable
     public Identifier getIdentifier() {
         return identifier;
+    }
+
+    public String getLore() {
+        return TextFormat.GRAY + this.getName() + " " + Enchantment.getLevelString(this.getLevel());
     }
 
     public int getLevel() {
