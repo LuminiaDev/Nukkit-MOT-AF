@@ -872,7 +872,7 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
         if (this.spawned) {
-            this.server.updatePlayerListData(this.getUniqueId(), this.getId(), this.displayName, this.getSkin(), this.loginChainData.getXUID());
+            this.server.updatePlayerListData(this.getLoginUuid(), this.getId(), this.displayName, this.getSkin(), this.loginChainData.getXUID());
         }
     }
 
@@ -880,7 +880,7 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
     public void setSkin(Skin skin) {
         super.setSkin(skin);
         if (this.spawned) {
-            this.server.updatePlayerListData(this.getUniqueId(), this.getId(), this.displayName, skin, this.loginChainData.getXUID());
+            this.server.updatePlayerListData(this.getLoginUuid(), this.getId(), this.displayName, skin, this.loginChainData.getXUID());
         }
     }
 
@@ -3171,8 +3171,14 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
 
                 this.randomClientId = loginPacket.clientId;
 
-                this.uuid = loginPacket.clientUUID;
-                this.rawUUID = Binary.writeUUID(this.uuid);
+                UUID loginUuid = loginPacket.clientUUID;
+                UUID lookupUuid = server.lookupName(username).orElse(loginChainData.isXboxAuthed()
+                        ? loginUuid
+                        : UUID.nameUUIDFromBytes(username.getBytes()));
+
+                this.loginUuid = loginUuid;
+                this.uuid = lookupUuid;
+                this.rawUUID = Binary.writeUUID(lookupUuid);
 
                 boolean valid = true;
                 int len = loginPacket.username.length();
@@ -5105,7 +5111,7 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
         if (this.level.getGameRules().getBoolean(GameRule.SEND_COMMAND_FEEDBACK)) {
             var pk = new CommandOutputPacket();
             pk.messages.addAll(container.getMessages());
-            pk.commandOriginData = new CommandOriginData(CommandOriginData.Origin.PLAYER, this.getUniqueId(), "", null);//Only players can effect
+            pk.commandOriginData = new CommandOriginData(CommandOriginData.Origin.PLAYER, this.getLoginUuid(), "", null);//Only players can effect
             pk.type = CommandOutputType.ALL_OUTPUT;//Useless
             pk.successCount = container.getSuccessCount();//Useless,maybe used for server-client interaction
             this.dataPacket(pk);

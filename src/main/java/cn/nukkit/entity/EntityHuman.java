@@ -34,6 +34,7 @@ public class EntityHuman extends EntityHumanType {
     public static final int DATA_PLAYER_FLAGS = 26;
     public static final int DATA_PLAYER_BUTTON_TEXT = 40;
 
+    protected UUID loginUuid;
     protected UUID uuid;
     protected byte[] rawUUID;
 
@@ -96,6 +97,10 @@ public class EntityHuman extends EntityHumanType {
 
     public Skin getSkin() {
         return skin;
+    }
+
+    public UUID getLoginUuid() {
+        return loginUuid;
     }
 
     @Override
@@ -321,7 +326,7 @@ public class EntityHuman extends EntityHumanType {
             }
 
             if (this.isPlayer) {
-                this.server.updatePlayerListData(this.uuid, this.getId(), ((Player) this).getDisplayName(), this.skin, ((Player) this).getLoginChainData().getXUID(), new Player[]{player});
+                this.server.updatePlayerListData(this.loginUuid, this.getId(), ((Player) this).getDisplayName(), this.skin, ((Player) this).getLoginChainData().getXUID(), new Player[]{player});
             } else {
                 this.server.updatePlayerListData(this.uuid, this.getId(), this.getName(), this.skin, new Player[]{player});
             }
@@ -329,7 +334,7 @@ public class EntityHuman extends EntityHumanType {
             PlayerInventory playerInventory = Objects.requireNonNullElse(this.inventory, BaseEntity.EMPTY_INVENTORY);
 
             AddPlayerPacket pk = new AddPlayerPacket();
-            pk.uuid = this.uuid;
+            pk.uuid = this.isPlayer ? this.loginUuid : this.uuid;
             pk.username = this.getName();
             pk.entityUniqueId = this.getId();
             pk.entityRuntimeId = this.getId();
