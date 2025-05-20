@@ -64,12 +64,6 @@ public class BlockEntityShulkerBox extends BlockEntitySpawnable implements Inven
     }
 
     @Override
-    public boolean isBlockEntityValid() {
-        int blockID = this.getBlock().getId();
-        return blockID == Block.SHULKER_BOX || blockID == Block.UNDYED_SHULKER_BOX;
-    }
-
-    @Override
     public int getSize() {
         return 27;
     }
@@ -128,11 +122,6 @@ public class BlockEntityShulkerBox extends BlockEntitySpawnable implements Inven
     }
 
     @Override
-    public boolean hasName() {
-        return this.namedTag.contains("CustomName");
-    }
-
-    @Override
     public void setName(String name) {
         if (name == null || name.isEmpty()) {
             this.namedTag.remove("CustomName");
@@ -140,6 +129,11 @@ public class BlockEntityShulkerBox extends BlockEntitySpawnable implements Inven
         }
 
         this.namedTag.putString("CustomName", name);
+    }
+
+    @Override
+    public boolean hasName() {
+        return this.namedTag.contains("CustomName");
     }
 
     @Override

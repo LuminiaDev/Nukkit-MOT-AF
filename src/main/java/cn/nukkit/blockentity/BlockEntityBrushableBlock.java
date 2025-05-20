@@ -34,13 +34,17 @@ public class BlockEntityBrushableBlock extends BlockEntitySpawnable implements B
         super(chunk, nbt);
     }
 
+    public BlockFace getBrushDirection() {
+        return BlockFace.fromIndex(this.brushDirection);
+    }
+
     public void setBrushDirection(BlockFace face) {
         this.brushDirection = (byte) face.getIndex();
         this.namedTag.putByte("brush_direction", this.brushDirection);
     }
 
-    public BlockFace getBrushDirection() {
-        return BlockFace.fromIndex(this.brushDirection);
+    public int getBrushCount() {
+        return brushCount;
     }
 
     public void setBrushCount(int brushCount) {
@@ -48,17 +52,13 @@ public class BlockEntityBrushableBlock extends BlockEntitySpawnable implements B
         this.namedTag.putInt("brush_count", brushCount);
     }
 
-    public int getBrushCount() {
-        return brushCount;
+    public boolean isRare() {
+        return rare;
     }
 
     public void setRare(boolean rare) {
         this.rare = rare;
         this.namedTag.putString("LootTable", getLootTablePath());
-    }
-
-    public boolean isRare() {
-        return rare;
     }
 
     @Override
@@ -89,11 +89,6 @@ public class BlockEntityBrushableBlock extends BlockEntitySpawnable implements B
     @Override
     public boolean hasName() {
         return this.namedTag.contains("CustomName");
-    }
-
-    @Override
-    public boolean isBlockEntityValid() {
-        return getBlock().isSuspiciousBlock();
     }
 
     @Override

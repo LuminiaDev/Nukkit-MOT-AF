@@ -1,6 +1,5 @@
 package cn.nukkit.blockentity;
 
-import cn.nukkit.block.Block;
 import cn.nukkit.block.BlockID;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.ItemPotterySherd;
@@ -51,11 +50,6 @@ public class BlockEntityDecoratedPot extends BlockEntitySpawnable {
     public void saveNBT() {
         super.saveNBT();
         this.namedTag.put("item", NBTIO.putItemHelper(this.item));
-    }
-
-    @Override
-    public boolean isBlockEntityValid() {
-        return getBlock().getId() == Block.DECORATED_POT;
     }
 
     @Override

@@ -1,7 +1,6 @@
 package cn.nukkit.blockentity;
 
 import cn.nukkit.Player;
-import cn.nukkit.block.Block;
 import cn.nukkit.event.block.SignChangeEvent;
 import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.nbt.tag.CompoundTag;
@@ -34,6 +33,15 @@ public class BlockEntitySign extends BlockEntitySpawnable {
 
     public BlockEntitySign(FullChunk chunk, CompoundTag nbt) {
         super(chunk, nbt);
+    }
+
+    private static void sanitizeText(String[] lines) {
+        for (int i = 0; i < lines.length; i++) {
+            // Don't allow excessive text per line
+            if (lines[i] != null) {
+                lines[i] = lines[i].substring(0, Math.min(200, lines[i].length()));
+            }
+        }
     }
 
     @Override
@@ -140,12 +148,6 @@ public class BlockEntitySign extends BlockEntitySpawnable {
                 .putLong(TAG_LOCKED_FOR_EDITING_BY, getEditorEntityRuntimeId());
     }
 
-    @Override
-    public boolean isBlockEntityValid() {
-        int blockID = getBlock().getId();
-        return blockID == Block.SIGN_POST || blockID == Block.WALL_SIGN;
-    }
-
     /**
      * 设置编辑此告示牌的玩家的运行时实体 ID。只有此玩家才能编辑告示牌。这用于防止多个玩家同时编辑同一告示牌，并防止玩家编辑他们未放置的告示牌。
      * <p>
@@ -187,16 +189,16 @@ public class BlockEntitySign extends BlockEntitySpawnable {
         return getColor(true);
     }
 
+    public void setColor(BlockColor color) {
+        this.setColor(true, color);
+    }
+
     public BlockColor getColor(boolean front) {
         if (front) {
             return new BlockColor(this.namedTag.getCompound(TAG_FRONT_TEXT).getInt(TAG_TEXT_COLOR), true);
         } else {
             return new BlockColor(this.namedTag.getCompound(TAG_BACK_TEXT).getInt(TAG_TEXT_COLOR), true);
         }
-    }
-
-    public void setColor(BlockColor color) {
-        this.setColor(true, color);
     }
 
     public void setColor(boolean front, BlockColor color) {
@@ -211,16 +213,16 @@ public class BlockEntitySign extends BlockEntitySpawnable {
         return this.isGlowing(true);
     }
 
+    public void setGlowing(boolean glowing) {
+        this.setGlowing(true, glowing);
+    }
+
     public boolean isGlowing(boolean front) {
         if (front) {
             return this.namedTag.getCompound(TAG_FRONT_TEXT).getBoolean(TAG_GLOWING_TEXT);
         } else {
             return this.namedTag.getCompound(TAG_BACK_TEXT).getBoolean(TAG_GLOWING_TEXT);
         }
-    }
-
-    public void setGlowing(boolean glowing) {
-        this.setGlowing(true, glowing);
     }
 
     public void setGlowing(boolean front, boolean glowing) {
@@ -306,14 +308,5 @@ public class BlockEntitySign extends BlockEntitySpawnable {
         }
 
         return tag;
-    }
-
-    private static void sanitizeText(String[] lines) {
-        for (int i = 0; i < lines.length; i++) {
-            // Don't allow excessive text per line
-            if (lines[i] != null) {
-                lines[i] = lines[i].substring(0, Math.min(200, lines[i].length()));
-            }
-        }
     }
 }

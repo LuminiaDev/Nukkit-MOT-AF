@@ -35,18 +35,8 @@ public class BlockEntityDropper extends BlockEntitySpawnable implements Inventor
     }
 
     @Override
-    public boolean isBlockEntityValid() {
-        return this.level.getBlockIdAt(chunk, this.getFloorX(), this.getFloorY(), this.getFloorZ()) == Block.DROPPER;
-    }
-
-    @Override
     public String getName() {
         return this.hasName() ? this.namedTag.getString("CustomName") : "Dropper";
-    }
-
-    @Override
-    public boolean hasName() {
-        return this.namedTag.contains("CustomName");
     }
 
     @Override
@@ -57,6 +47,11 @@ public class BlockEntityDropper extends BlockEntitySpawnable implements Inventor
         }
 
         this.namedTag.putString("CustomName", name);
+    }
+
+    @Override
+    public boolean hasName() {
+        return this.namedTag.contains("CustomName");
     }
 
     @Override

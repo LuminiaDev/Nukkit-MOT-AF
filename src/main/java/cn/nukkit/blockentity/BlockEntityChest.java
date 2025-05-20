@@ -1,7 +1,6 @@
 package cn.nukkit.blockentity;
 
 import cn.nukkit.Player;
-import cn.nukkit.block.Block;
 import cn.nukkit.inventory.BaseInventory;
 import cn.nukkit.inventory.ChestInventory;
 import cn.nukkit.inventory.DoubleChestInventory;
@@ -53,12 +52,6 @@ public class BlockEntityChest extends BlockEntitySpawnableContainer implements B
     public void onBreak() {
         this.unpair();
         super.onBreak();
-    }
-
-    @Override
-    public boolean isBlockEntityValid() {
-        int blockID = this.getBlock().getId();
-        return blockID == Block.CHEST || blockID == Block.TRAPPED_CHEST;
     }
 
     @Override
@@ -203,11 +196,6 @@ public class BlockEntityChest extends BlockEntitySpawnableContainer implements B
     }
 
     @Override
-    public boolean hasName() {
-        return this.namedTag.contains("CustomName");
-    }
-
-    @Override
     public void setName(String name) {
         if (name == null || name.equals("")) {
             this.namedTag.remove("CustomName");
@@ -215,5 +203,10 @@ public class BlockEntityChest extends BlockEntitySpawnableContainer implements B
         }
 
         this.namedTag.putString("CustomName", name);
+    }
+
+    @Override
+    public boolean hasName() {
+        return this.namedTag.contains("CustomName");
     }
 }

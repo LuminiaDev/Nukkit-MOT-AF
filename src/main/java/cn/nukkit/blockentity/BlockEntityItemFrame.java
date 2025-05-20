@@ -50,11 +50,6 @@ public class BlockEntityItemFrame extends BlockEntitySpawnable {
         return "Item Frame";
     }
 
-    @Override
-    public boolean isBlockEntityValid() {
-        return this.getBlock().getId() == Block.ITEM_FRAME_BLOCK;
-    }
-
     public int getItemRotation() {
         return this.namedTag.getByte("ItemRotation");
     }

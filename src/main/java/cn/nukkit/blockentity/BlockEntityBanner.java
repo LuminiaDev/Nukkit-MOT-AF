@@ -1,6 +1,5 @@
 package cn.nukkit.blockentity;
 
-import cn.nukkit.block.Block;
 import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.nbt.tag.ListTag;
@@ -24,11 +23,6 @@ public class BlockEntityBanner extends BlockEntitySpawnable {
         this.color = this.namedTag.getByte("color");
 
         super.initBlockEntity();
-    }
-
-    @Override
-    public boolean isBlockEntityValid() {
-        return this.getBlock().getId() == Block.WALL_BANNER || this.getBlock().getId() == Block.STANDING_BANNER;
     }
 
     @Override
