@@ -194,9 +194,8 @@ public abstract class BlockEntity extends Position {
     }
 
     public boolean isBlockEntityValid() {
-        Block block = this.getBlock();
-        if (block instanceof BlockEntityHolder<?> holder) {
-            return holder.getBlockEntityType().equals(this.getName());
+        if (this.getLevelBlock() instanceof BlockEntityHolder<?> holder) {
+            return holder.getBlockEntityType().equals(this.getSaveId());
         }
         return false;
     }
