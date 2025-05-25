@@ -182,7 +182,7 @@ public class BlockEntityPistonArm extends BlockEntitySpawnable {
             }
 
             if (!extending) {
-                if (this.level.getBlock(this.getSide(facing)).getId() == (sticky? BlockID.PISTON_HEAD_STICKY : BlockID.PISTON_HEAD)) {
+                if (this.level.getBlock(this.getSide(facing)).getId() == (sticky ? BlockID.PISTON_HEAD_STICKY : BlockID.PISTON_HEAD)) {
                     this.level.setBlock(this.getSide(facing), new BlockAir());
                 }
                 this.movable = true;
@@ -201,11 +201,6 @@ public class BlockEntityPistonArm extends BlockEntitySpawnable {
 
     private float getExtendedProgress(float progress) {
         return this.extending ? progress - 1 : 1 - progress;
-    }
-
-    @Override
-    public boolean isBlockEntityValid() {
-        return true;
     }
 
     @Override

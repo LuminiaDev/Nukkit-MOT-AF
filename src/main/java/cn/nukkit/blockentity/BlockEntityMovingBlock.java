@@ -1,7 +1,6 @@
 package cn.nukkit.blockentity;
 
 import cn.nukkit.block.Block;
-import cn.nukkit.block.BlockID;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.math.AxisAlignedBB;
@@ -70,11 +69,6 @@ public class BlockEntityMovingBlock extends BlockEntitySpawnable {
         for (Entity entity : entities) {
             piston.moveEntity(entity, moveDirection);
         }
-    }
-
-    @Override
-    public boolean isBlockEntityValid() {
-        return this.level.getBlockIdAt(getFloorX(), getFloorY(), getFloorZ()) == BlockID.MOVING_BLOCK;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package cn.nukkit.blockentity;
 
-import cn.nukkit.block.BlockID;
 import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.level.persistence.PersistentDataContainer;
 import cn.nukkit.nbt.tag.CompoundTag;
@@ -19,11 +18,6 @@ public class PersistentDataContainerBlockEntity extends BlockEntity implements P
             this.close();
         }
         return false;
-    }
-
-    @Override
-    public boolean isBlockEntityValid() {
-        return this.level.getBlockIdAt(this.chunk, (int) this.x, (int) this.y, (int) this.z) != BlockID.AIR;
     }
 
     @Override

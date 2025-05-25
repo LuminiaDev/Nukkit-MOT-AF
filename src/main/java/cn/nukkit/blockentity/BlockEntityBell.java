@@ -1,7 +1,6 @@
 package cn.nukkit.blockentity;
 
 import cn.nukkit.Player;
-import cn.nukkit.block.Block;
 import cn.nukkit.level.Sound;
 import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.nbt.tag.ByteTag;
@@ -13,10 +12,10 @@ import java.util.List;
 
 public class BlockEntityBell extends BlockEntitySpawnable {
 
+    public final List<Player> spawnExceptions = new ArrayList<>(2);
     private boolean ringing;
     private int direction;
     private int ticks;
-    public final List<Player> spawnExceptions = new ArrayList<>(2);
 
     public BlockEntityBell(FullChunk chunk, CompoundTag nbt) {
         super(chunk, nbt);
@@ -129,10 +128,5 @@ public class BlockEntityBell extends BlockEntitySpawnable {
                 .putBoolean("Ringing", this.ringing)
                 .putInt("Direction", this.direction)
                 .putInt("Ticks", this.ticks);
-    }
-
-    @Override
-    public boolean isBlockEntityValid() {
-        return getBlock().getId() == Block.BELL;
     }
 }

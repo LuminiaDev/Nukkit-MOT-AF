@@ -41,11 +41,6 @@ public class BlockEntityConduit extends BlockEntitySpawnable {
     }
 
     @Override
-    public boolean isBlockEntityValid() {
-        return level.getBlockIdAt(chunk, (int) x, (int) y, (int) z) == Block.CONDUIT;
-    }
-
-    @Override
     public CompoundTag getSpawnCompound() {
         return new CompoundTag()
                 .putString("id", BlockEntity.CONDUIT)

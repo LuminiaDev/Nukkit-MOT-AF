@@ -1073,6 +1073,14 @@ public class Level implements ChunkManager, Metadatable {
         }
 
         this.updateBlockEntities.removeIf(blockEntity -> !blockEntity.isValid() || !blockEntity.onUpdate());
+        // Closing invalid block entities
+        Set<BlockEntity> blockEntities = new HashSet<>(this.blockEntities.values());
+        blockEntities.forEach(blockEntity -> {
+            boolean valid = blockEntity.isValid() && blockEntity.isBlockEntityValid();
+            if (!valid) {
+                blockEntity.close();
+            }
+        });
 
         this.tickChunks();
 

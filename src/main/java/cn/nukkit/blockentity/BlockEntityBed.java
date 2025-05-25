@@ -1,6 +1,5 @@
 package cn.nukkit.blockentity;
 
-import cn.nukkit.item.Item;
 import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.utils.DyeColor;
@@ -25,11 +24,6 @@ public class BlockEntityBed extends BlockEntitySpawnable {
         this.color = this.namedTag.getByte("color");
 
         super.initBlockEntity();
-    }
-
-    @Override
-    public boolean isBlockEntityValid() {
-        return this.level.getBlockIdAt(chunk, this.getFloorX(), this.getFloorY(), this.getFloorZ()) == Item.BED_BLOCK;
     }
 
     @Override

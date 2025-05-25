@@ -1,6 +1,5 @@
 package cn.nukkit.blockentity;
 
-import cn.nukkit.block.Block;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.ItemRecord;
 import cn.nukkit.level.format.FullChunk;
@@ -32,18 +31,13 @@ public class BlockEntityJukebox extends BlockEntitySpawnable {
         super.initBlockEntity();
     }
 
-    @Override
-    public boolean isBlockEntityValid() {
-        return this.getLevel().getBlockIdAt(chunk, getFloorX(), getFloorY(), getFloorZ()) == Block.JUKEBOX;
+    public Item getRecordItem() {
+        return recordItem;
     }
 
     public void setRecordItem(Item recordItem) {
         Objects.requireNonNull(recordItem, "Record item cannot be null");
         this.recordItem = recordItem;
-    }
-
-    public Item getRecordItem() {
-        return recordItem;
     }
 
     public void play() {
@@ -77,7 +71,7 @@ public class BlockEntityJukebox extends BlockEntitySpawnable {
                     throw new IllegalStateException("Sound is not implemented for item: " + this.recordItem.getNamespaceId());
                 }
                 default ->
-                    throw new IllegalStateException("Sound is not implemented for item: " + this.recordItem.getId());
+                        throw new IllegalStateException("Sound is not implemented for item: " + this.recordItem.getId());
             });
         }
     }
@@ -120,7 +114,7 @@ public class BlockEntityJukebox extends BlockEntitySpawnable {
      * If there is no record in the jukebox or the placed item is not a record, it will return 0.</p>
      *
      * @return 比较器信号强度值，范围从 0 到 15。
-     *         The comparator signal strength value, ranging from 0 to 15.
+     * The comparator signal strength value, ranging from 0 to 15.
      */
     public int getComparatorSignal() {
         if (this.recordItem instanceof ItemRecord) {

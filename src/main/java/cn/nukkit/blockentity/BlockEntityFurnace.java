@@ -120,11 +120,6 @@ public class BlockEntityFurnace extends BlockEntitySpawnable implements Inventor
     }
 
     @Override
-    public boolean hasName() {
-        return this.namedTag.contains("CustomName");
-    }
-
-    @Override
     public void setName(String name) {
         if (name == null || name.isEmpty()) {
             this.namedTag.remove("CustomName");
@@ -132,6 +127,11 @@ public class BlockEntityFurnace extends BlockEntitySpawnable implements Inventor
         }
 
         this.namedTag.putString("CustomName", name);
+    }
+
+    @Override
+    public boolean hasName() {
+        return this.namedTag.contains("CustomName");
     }
 
     @Override
@@ -166,12 +166,6 @@ public class BlockEntityFurnace extends BlockEntitySpawnable implements Inventor
         this.namedTag.putShort("BurnDuration", burnDuration);
         this.namedTag.putShort("MaxTime", maxTime);
         this.namedTag.putShort("StoredXpInt", (int) experience);
-    }
-
-    @Override
-    public boolean isBlockEntityValid() {
-        int blockID = getBlock().getId();
-        return blockID == this.getIdleBlockId() || blockID == this.getBurningBlockId();
     }
 
     @Override

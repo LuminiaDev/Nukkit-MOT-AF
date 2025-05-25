@@ -38,18 +38,8 @@ public class BlockEntityDispenser extends BlockEntitySpawnable implements Invent
     }
 
     @Override
-    public boolean isBlockEntityValid() {
-        return this.getLevelBlock().getId() == BlockID.DISPENSER;
-    }
-
-    @Override
     public String getName() {
         return this.hasName() ? this.namedTag.getString("CustomName") : "Dispenser";
-    }
-
-    @Override
-    public boolean hasName() {
-        return this.namedTag.contains("CustomName");
     }
 
     @Override
@@ -60,6 +50,11 @@ public class BlockEntityDispenser extends BlockEntitySpawnable implements Invent
         }
 
         this.namedTag.putString("CustomName", name);
+    }
+
+    @Override
+    public boolean hasName() {
+        return this.namedTag.contains("CustomName");
     }
 
     @Override

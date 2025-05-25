@@ -1,6 +1,5 @@
 package cn.nukkit.blockentity;
 
-import cn.nukkit.block.Block;
 import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.nbt.tag.CompoundTag;
 
@@ -15,18 +14,8 @@ public class BlockEntityEnchantTable extends BlockEntitySpawnable implements Blo
     }
 
     @Override
-    public boolean isBlockEntityValid() {
-        return getBlock().getId() == Block.ENCHANT_TABLE;
-    }
-
-    @Override
     public String getName() {
         return this.hasName() ? this.namedTag.getString("CustomName") : "Enchanting Table";
-    }
-
-    @Override
-    public boolean hasName() {
-        return this.namedTag.contains("CustomName");
     }
 
     @Override
@@ -37,6 +26,11 @@ public class BlockEntityEnchantTable extends BlockEntitySpawnable implements Blo
         }
 
         this.namedTag.putString("CustomName", name);
+    }
+
+    @Override
+    public boolean hasName() {
+        return this.namedTag.contains("CustomName");
     }
 
     @Override
