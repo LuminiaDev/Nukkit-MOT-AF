@@ -2,11 +2,14 @@ package cn.nukkit.block;
 
 import cn.nukkit.Player;
 import cn.nukkit.blockentity.BlockEntity;
+import cn.nukkit.blockentity.BlockEntityItemFrame;
+import cn.nukkit.blockentity.BlockEntityItemFrameGlow;
 import cn.nukkit.item.Item;
 import cn.nukkit.math.BlockFace;
 import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.nbt.tag.Tag;
 import cn.nukkit.network.protocol.LevelEventPacket;
+import org.jetbrains.annotations.NotNull;
 
 public class BlockItemFrameGlow extends BlockItemFrame {
 
@@ -26,6 +29,18 @@ public class BlockItemFrameGlow extends BlockItemFrame {
     @Override
     public int getId() {
         return GLOW_FRAME;
+    }
+
+    @NotNull
+    @Override
+    public Class<? extends BlockEntityItemFrame> getBlockEntityClass() {
+        return BlockEntityItemFrameGlow.class;
+    }
+
+    @NotNull
+    @Override
+    public String getBlockEntityType() {
+        return BlockEntity.GLOW_ITEM_FRAME;
     }
 
     @Override
