@@ -13,13 +13,14 @@ import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.nbt.tag.ListTag;
 import cn.nukkit.utils.BlockColor;
 import cn.nukkit.utils.DyeColor;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
 /**
  * Created by PetteriM1
  */
-public class BlockShulkerBox extends BlockTransparentMeta {
+public class BlockShulkerBox extends BlockTransparentMeta implements BlockEntityHolder<BlockEntityShulkerBox> {
 
     public BlockShulkerBox() {
         this(0);
@@ -42,6 +43,18 @@ public class BlockShulkerBox extends BlockTransparentMeta {
     @Override
     public String getName() {
         return this.getDyeColor().getName() + " Shulker Box";
+    }
+
+    @NotNull
+    @Override
+    public Class<? extends BlockEntityShulkerBox> getBlockEntityClass() {
+        return BlockEntityShulkerBox.class;
+    }
+
+    @NotNull
+    @Override
+    public String getBlockEntityType() {
+        return BlockEntity.SHULKER_BOX;
     }
 
     @Override

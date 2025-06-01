@@ -1613,23 +1613,11 @@ public class Item implements Cloneable, BlockID, ItemID, ItemNamespaceId, Protoc
     }
 
     private String getCustomEnchantmentDisplay(ListTag<CompoundTag> customEnchantments) {
-        StringJoiner joiner = new StringJoiner("\n");
-
-        String originalName;
-        if (this.hasSavedCustomName()) {
-            originalName = this.getSavedCustomName();
-        } else {
-            if (this.isTool() && !(this instanceof CustomItem)) {
-                originalName = "%item." + this.getNamespaceId().split(":")[1] + ".name";
-            } else {
-                originalName = this.idConvertToName();
-            }
-        }
-
-        joiner.add(TextFormat.RESET.toString() + TextFormat.AQUA + originalName + TextFormat.RESET);
-
+        StringJoiner joiner = new StringJoiner("\n", String.valueOf(TextFormat.RESET) + TextFormat.AQUA + idConvertToName() + "\n", "");
         for (var enchant : customEnchantments.getAll()) {
-            var enchantment = Enchantment.getEnchantment(enchant.getString("id")).setLevel(enchant.getShort("lvl"));
+            var enchantment = Enchantment.getEnchantment(
+                    enchant.getString("id")).setLevel(
+                            enchant.getShort("lvl"));
             joiner.add(enchantment.getLore());
         }
         return joiner.toString();
