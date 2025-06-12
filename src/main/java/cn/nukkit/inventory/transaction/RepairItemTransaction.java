@@ -258,7 +258,7 @@ public class RepairItemTransaction extends InventoryTransaction {
                 }
 
                 Enchantment[] outputEnchantments = this.outputItem.getEnchantments();
-                if (hasIncompatibleEnchantments && !hasCompatibleEnchantments || enchantments.size() != outputEnchantments.length) {
+                if (hasIncompatibleEnchantments && (!hasCompatibleEnchantments || enchantments.size() != outputEnchantments.length)) {
                     return false;
                 }
 
