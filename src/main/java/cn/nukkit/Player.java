@@ -118,6 +118,8 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -174,6 +176,11 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
     public static final int MINIMUM_OTHER_WINDOW_ID = Utils.dynamic(8);
 
     public static final int RESOURCE_PACK_CHUNK_SIZE = 8 * 1024; // 8KB
+
+    /**
+     * Regular expression for validating player name. Allows only: Number nicknames, letter nicknames, number and letters nicknames, nicknames with underscores, nicknames with space in the middle
+     */
+    private static final Pattern PLAYER_NAME_PATTERN = Pattern.compile("^(?! )[A-Za-z0-9_](?: ?(?! )?[A-Za-z0-9_]){1,14}$");
 
     protected final SourceInterface interfaz;
     protected final NetworkPlayerSession networkSession;
@@ -3181,25 +3188,9 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
                 this.rawUUID = Binary.writeUUID(lookupUuid);
 
                 boolean valid = true;
-                int len = loginPacket.username.length();
-                if (len > 16 || len < 3 || loginPacket.username.trim().isEmpty()) {
+                Matcher usernameMatcher = PLAYER_NAME_PATTERN.matcher(loginPacket.username);
+                if (!usernameMatcher.matches()) {
                     valid = false;
-                }
-
-                if (valid) {
-                    for (int i = 0; i < len; i++) {
-                        char c = loginPacket.username.charAt(i);
-                        if ((c >= 'a' && c <= 'z') ||
-                                (c >= 'A' && c <= 'Z') ||
-                                (c >= '0' && c <= '9') ||
-                                c == '_' || c == ' '
-                        ) {
-                            continue;
-                        }
-
-                        valid = false;
-                        break;
-                    }
                 }
 
                 if (!valid || Objects.equals(this.iusername, "rcon") || Objects.equals(this.iusername, "console")) {
