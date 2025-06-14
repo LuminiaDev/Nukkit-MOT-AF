@@ -35,7 +35,7 @@ public interface LoginChainData {
     String getLanguageCode();
 
     String getXUID();
-   
+
     boolean isXboxAuthed();
 
     int getCurrentInputMode();
@@ -59,4 +59,6 @@ public interface LoginChainData {
     String getWaterdogIP();
 
     JsonObject getRawData();
+
+    String getTitleId();
 }
