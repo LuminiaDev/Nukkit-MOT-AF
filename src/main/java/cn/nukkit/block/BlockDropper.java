@@ -13,11 +13,12 @@ import cn.nukkit.math.BlockFace;
 import cn.nukkit.math.Vector3;
 import cn.nukkit.utils.Faceable;
 import cn.nukkit.utils.Utils;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class BlockDropper extends BlockSolidMeta implements Faceable {
+public class BlockDropper extends BlockSolidMeta implements Faceable, BlockEntityHolder<BlockEntityDropper> {
 
     protected boolean triggered = false;
 
@@ -220,5 +221,15 @@ public class BlockDropper extends BlockSolidMeta implements Faceable {
         }
 
         return 0;
+    }
+
+    @Override
+    public @NotNull Class<? extends BlockEntityDropper> getBlockEntityClass() {
+        return BlockEntityDropper.class;
+    }
+
+    @Override
+    public @NotNull String getBlockEntityType() {
+        return BlockEntity.DROPPER;
     }
 }
