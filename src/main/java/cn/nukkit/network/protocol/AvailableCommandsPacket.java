@@ -8,10 +8,7 @@ import com.google.gson.Gson;
 import lombok.ToString;
 import org.cloudburstmc.protocol.common.util.TypeMap;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.ObjIntConsumer;
 
 import static org.cloudburstmc.protocol.common.util.Preconditions.checkArgument;
@@ -613,13 +610,9 @@ public class AvailableCommandsPacket extends DataPacket {
             type |= ARG_FLAG_VALID;
             if (parameter.enumData != null) {
                 if (parameter.enumData.isSoft()) {
-                    type = softEnums.indexOf(parameter.enumData) | ARG_FLAG_SOFT_ENUM;
+                    type = softEnums.indexOf(parameter.enumData) | ARG_FLAG_SOFT_ENUM | ARG_FLAG_VALID;
                 } else {
-                    int i = enums.indexOf(parameter.enumData);
-                    if (i < 0) {
-                        throw new IllegalStateException("Enum '" + parameter.enumData.getName() + "' isn't in enums array");
-                    }
-                    type |= ARG_FLAG_ENUM | i;
+                    type = enums.indexOf(parameter.enumData) | ARG_FLAG_ENUM | ARG_FLAG_VALID;
                 }
             } else {
                 CommandParam commandParam = COMMAND_PARAMS.getType(parameter.type.getId()); //正常来说应该传入最新版的数字id
