@@ -179,7 +179,7 @@ public class RepairItemTransaction extends InventoryTransaction {
                     return false;
                 }
             } else {
-                boolean consumeEnchantedBook = this.materialItem.getId() == Item.ENCHANTED_BOOK && this.materialItem.hasEnchantments();
+                boolean consumeEnchantedBook = this.materialItem.isEnchantBook() && this.materialItem.hasEnchantments();
                 if (!consumeEnchantedBook && (this.inputItem.getMaxDurability() == -1 || this.inputItem.getId() != this.materialItem.getId())) {
                     return false;
                 }
@@ -212,7 +212,7 @@ public class RepairItemTransaction extends InventoryTransaction {
                     int materialLevel = materialEnchantment.getLevel();
                     int outputLevel = inputLevel == materialLevel ? materialLevel + 1 : Math.max(materialLevel, inputLevel);
 
-                    boolean canEnchant = materialEnchantment.canEnchant(this.inputItem) || this.inputItem.getId() == Item.ENCHANTED_BOOK;
+                    boolean canEnchant = materialEnchantment.canEnchant(this.inputItem) || this.inputItem.isEnchantBook();
                     for (Enchantment inputEnchantment : this.inputItem.getEnchantments()) {
                         if (inputEnchantment.getId() != materialEnchantment.getId() && !materialEnchantment.isCompatibleWith(inputEnchantment)) {
                             canEnchant = false;

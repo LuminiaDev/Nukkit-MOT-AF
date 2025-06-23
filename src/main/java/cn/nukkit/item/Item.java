@@ -2289,6 +2289,10 @@ public class Item implements Cloneable, BlockID, ItemID, ItemNamespaceId, Protoc
         return ItemLockMode.NONE;
     }
 
+    public boolean isEnchantBook() {
+        return false;
+    }
+
     public enum ItemLockMode {
         NONE,//only used in server
         LOCK_IN_SLOT,

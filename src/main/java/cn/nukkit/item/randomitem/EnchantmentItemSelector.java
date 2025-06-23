@@ -91,7 +91,7 @@ public class EnchantmentItemSelector extends ConstantItemSelector {
     public List<Enchantment> getSupportEnchantments(Item item) {
         ArrayList<Enchantment> enchantments = new ArrayList<>();
         for (Enchantment enchantment : Enchantment.getEnchantments()) {
-            if (item.getId() == Item.ENCHANTED_BOOK || enchantment.canEnchant(item)) {
+            if (item.isEnchantBook() || enchantment.canEnchant(item)) {
                 enchantments.add(enchantment);
             }
         }
