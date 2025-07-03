@@ -6686,7 +6686,11 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
             this.playerUIInventory.getCursorInventory().clear(0);
 
             for (Item drop : drops) {
-                this.level.dropItem(this, drop);
+                PlayerDropItemEvent event = new PlayerDropItemEvent(this, drop);
+                event.call();
+                if(!event.isCancelled()) {
+                    this.level.dropItem(this, drop);
+                }
             }
 
             // Don't trust the client to handle this
