@@ -38,7 +38,7 @@ public class KillCommand extends VanillaCommand {
     public int execute(CommandSender sender, String commandLabel, @NotNull Map.Entry<String, ParamList> result, CommandLogger log) {
         if (result.getValue().hasResult(0)) {
             if (!sender.hasPermission("nukkit.command.kill.other")) {
-                log.addError("nukkit.command.generic.permission").output();
+                log.addError("commands.generic.permission").output();
                 return 0;
             }
             List<Entity> entities = result.getValue().getResult(0);
@@ -85,7 +85,7 @@ public class KillCommand extends VanillaCommand {
         } else {
             if (sender.isPlayer()) {
                 if (!sender.hasPermission("nukkit.command.kill.self")) {
-                    log.addError("nukkit.command.generic.permission").output();
+                    log.addError("commands.generic.permission").output();
                     return 0;
                 }
                 if (sender.asPlayer().isCreative()) {

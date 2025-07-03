@@ -307,7 +307,7 @@ public class SimpleCommandMap implements CommandMap {
                 } else {
                     var log = new CommandLogger(target, sender, sentCommandLabel, args, plugin);
                     if (target.getPermissionMessage() == null) {
-                        log.addMessage("nukkit.command.generic.permission").output();
+                        log.addMessage("commands.generic.permission").output();
                     } else if (!target.getPermissionMessage().isEmpty()) {
                         log.addError(target.getPermissionMessage().replace("<permission>", target.getPermission())).output();
                     }

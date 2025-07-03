@@ -60,7 +60,7 @@ public class GamemodeCommand extends VanillaCommand {
             if (sender.hasPermission("nukkit.command.gamemode.other")) {
                 players = list.getResult(1);
             } else {
-                log.addMessage(TextFormat.RED + "%nukkit.command.generic.permission").output();
+                log.addMessage(TextFormat.RED + "%commands.generic.permission").output();
                 return 0;
             }
         } else {
@@ -76,7 +76,7 @@ public class GamemodeCommand extends VanillaCommand {
                 (gameMode == 1 && !sender.hasPermission("nukkit.command.gamemode.creative")) ||
                 (gameMode == 2 && !sender.hasPermission("nukkit.command.gamemode.adventure")) ||
                 (gameMode == 3 && !sender.hasPermission("nukkit.command.gamemode.spectator"))) {
-            log.addMessage(TextFormat.RED + "%nukkit.command.generic.permission").output();
+            log.addMessage(TextFormat.RED + "%commands.generic.permission").output();
             return 0;
         }
 

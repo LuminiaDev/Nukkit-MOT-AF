@@ -50,7 +50,7 @@ public class TimeCommand extends VanillaCommand {
                 String mode = list.getResult(0);
                 if ("start".equals(mode)) {
                     if (!sender.hasPermission("nukkit.command.time.start")) {
-                        log.addMessage("nukkit.command.generic.permission").output();
+                        log.addMessage("commands.generic.permission").output();
                         return 0;
                     }
                     for (Level level : sender.getServer().getLevels().values()) {
@@ -61,7 +61,7 @@ public class TimeCommand extends VanillaCommand {
                     log.addSuccess("Restarted the time").output(true);
                 } else if ("stop".equals(mode)) {
                     if (!sender.hasPermission("nukkit.command.time.stop")) {
-                        log.addMessage("nukkit.command.generic.permission").output();
+                        log.addMessage("commands.generic.permission").output();
                         return 0;
                     }
                     for (Level level : sender.getServer().getLevels().values()) {
@@ -72,7 +72,7 @@ public class TimeCommand extends VanillaCommand {
                     log.addSuccess("Stopped the time").output(true);
                 } else if ("query".equals(mode)) {
                     if (!sender.hasPermission("nukkit.command.time.query")) {
-                        log.addMessage("nukkit.command.generic.permission").output();
+                        log.addMessage("commands.generic.permission").output();
                         return 0;
                     }
                     Level level;
@@ -87,7 +87,7 @@ public class TimeCommand extends VanillaCommand {
             }
             case "add" -> {
                 if (!sender.hasPermission("nukkit.command.time.add")) {
-                    log.addMessage("nukkit.command.generic.permission").output();
+                    log.addMessage("commands.generic.permission").output();
                     return 0;
                 }
                 int value = list.getResult(1);
@@ -105,7 +105,7 @@ public class TimeCommand extends VanillaCommand {
             }
             case "setAmount" -> {
                 if (!sender.hasPermission("nukkit.command.time.set")) {
-                    log.addMessage("nukkit.command.generic.permission").output();
+                    log.addMessage("commands.generic.permission").output();
                     return 0;
                 }
                 int value = list.getResult(1);
@@ -123,7 +123,7 @@ public class TimeCommand extends VanillaCommand {
             }
             case "setTime" -> {
                 if (!sender.hasPermission("nukkit.command.time.set")) {
-                    log.addMessage("nukkit.command.generic.permission").output();
+                    log.addMessage("commands.generic.permission").output();
                     return 0;
                 }
                 int value = 0;
