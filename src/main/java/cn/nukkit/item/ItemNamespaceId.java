@@ -50,4 +50,6 @@ public interface ItemNamespaceId {
     String BLUE_EGG = "minecraft:blue_egg";
     String BROWN_EGG = "minecraft:brown_egg";
 
+    String MUSIC_DISC_LAVA_CHICKEN = "minecraft:record_lava_chicken";
+
 }

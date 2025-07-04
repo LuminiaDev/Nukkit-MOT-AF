@@ -487,6 +487,7 @@ public class Item implements Cloneable, BlockID, ItemID, ItemNamespaceId, Protoc
             registerNamespacedIdItem(ItemOminousBottle.class);
             registerNamespacedIdItem(ItemBlueEgg.class);
             registerNamespacedIdItem(ItemBrownEgg.class);
+            registerNamespacedIdItem(ItemRecordLavaChicken.class);
 
 
             // 添加原版物品到NAMESPACED_ID_ITEM
