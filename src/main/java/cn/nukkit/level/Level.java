@@ -17,6 +17,7 @@ import cn.nukkit.entity.passive.EntityIronGolem;
 import cn.nukkit.entity.projectile.EntityArrow;
 import cn.nukkit.entity.weather.EntityLightning;
 import cn.nukkit.event.block.BlockBreakEvent;
+import cn.nukkit.event.block.BlockNaturalBreakEvent;
 import cn.nukkit.event.block.BlockPlaceEvent;
 import cn.nukkit.event.block.BlockUpdateEvent;
 import cn.nukkit.event.entity.CreatureSpawnEvent;
@@ -2523,6 +2524,16 @@ public class Level implements ChunkManager, Metadatable {
         } else {
             drops = target.getDrops(null, item);
         }
+
+        BlockNaturalBreakEvent ev = new BlockNaturalBreakEvent(target, item, drops);
+        ev.call();
+
+        if (ev.isCancelled()) {
+            return null;
+        }
+
+        drops = ev.getDrops();
+        dropExp = ev.getDropExp();
 
         if (createParticles) {
             Map<Integer, Player> players = this.getChunkPlayers((int) target.x >> 4, (int) target.z >> 4);
