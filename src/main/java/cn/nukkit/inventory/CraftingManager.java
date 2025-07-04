@@ -804,7 +804,12 @@ public class CraftingManager {
      */
     public BatchPacket getCachedPacket(int protocol) {
         //TODO Multiversion 添加新版本支持时修改这里
-        if (protocol >= ProtocolInfo.v1_21_90) {
+        if (protocol >= ProtocolInfo.v1_21_93) {
+            if (packet818 == null) {
+                packet818 = packetFor(ProtocolInfo.v1_21_90);
+            }
+            return packet818;
+        } else if (protocol >= ProtocolInfo.v1_21_90) {
             if (packet818 == null) {
                 packet818 = packetFor(ProtocolInfo.v1_21_90);
             }
