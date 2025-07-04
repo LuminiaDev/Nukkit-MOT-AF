@@ -887,7 +887,7 @@ public class Item implements Cloneable, BlockID, ItemID, ItemNamespaceId, Protoc
 
     public static void addCreativeItem(Item item) {
         Server.mvw("Item#addCreativeItem(Item)");
-        addCreativeItem(v1_21_90, item);
+        addCreativeItem(v1_21_93, item);
     }
 
     public static void addCreativeItem(int protocol, Item item) {
@@ -1116,6 +1116,7 @@ public class Item implements Cloneable, BlockID, ItemID, ItemNamespaceId, Protoc
         registerCustomItem(customItem, v1_21_70, addCreativeItem, v1_21_70);
         registerCustomItem(customItem, v1_21_80, addCreativeItem, v1_21_80);
         registerCustomItem(customItem, v1_21_90, addCreativeItem, v1_21_90);
+        registerCustomItem(customItem, v1_21_93, addCreativeItem, v1_21_93);
         //TODO Multiversion 添加新版本支持时修改这里
 
         if (addCreativeItem) {
@@ -1169,6 +1170,7 @@ public class Item implements Cloneable, BlockID, ItemID, ItemNamespaceId, Protoc
             deleteCustomItem(customItem, v1_21_70, v1_21_70);
             deleteCustomItem(customItem, v1_21_80, v1_21_80);
             deleteCustomItem(customItem, v1_21_90, v1_21_90);
+            deleteCustomItem(customItem, v1_21_93, v1_21_93);
             //TODO Multiversion 添加新版本支持时修改这里
         }
     }
