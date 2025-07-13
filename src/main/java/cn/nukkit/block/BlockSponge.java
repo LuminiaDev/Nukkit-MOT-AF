@@ -117,7 +117,7 @@ public class BlockSponge extends BlockSolidMeta {
                     }
                 } else if (faceBlockLayer1 instanceof BlockWater) {
                     if (faceBlock.getId() == BlockID.BLOCK_KELP || faceBlock.getId() == BlockID.SEAGRASS || faceBlock.getId() == BlockID.SEA_PICKLE || faceBlock instanceof BlockCoralFan) {
-                        faceBlock.getLevel().useBreakOn(faceBlock);
+                        faceBlock.getLevel().useBreakOn(faceBlock, null, null, true);
                     }
                     this.getLevel().setBlock(faceBlockLayer1, 1, Block.get(BlockID.AIR));
                     waterRemoved++;

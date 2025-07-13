@@ -71,7 +71,7 @@ public class BlockRail extends BlockFlowable implements Faceable {
             Optional<BlockFace> ascendingDirection = this.getOrientation().ascendingDirection();
             Block down = this.down();
             if (!canStayOnFullSolid(this.down()) || (ascendingDirection.isPresent() && this.getSide(ascendingDirection.get()).isTransparent())) {
-                this.getLevel().useBreakOn(this);
+                this.getLevel().useBreakOn(this, null, null, true);
                 return Level.BLOCK_UPDATE_NORMAL;
             }
         }

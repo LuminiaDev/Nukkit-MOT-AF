@@ -83,7 +83,7 @@ public class BlockLever extends BlockFlowable implements Faceable {
             int face = this.isPowerOn() ? this.getDamage() ^ 0x08 : this.getDamage();
             BlockFace faces = LeverOrientation.byMetadata(face).getFacing().getOpposite();
             if (!isSupportValid(this.getSide(faces))) {
-                this.level.useBreakOn(this);
+                this.level.useBreakOn(this, null, null, true);
             }
         }
         return 0;

@@ -67,7 +67,7 @@ public class BlockItemFrame extends BlockTransparentMeta implements Faceable, Bl
     public int onUpdate(int type) {
         if (type == Level.BLOCK_UPDATE_NORMAL) {
             if (!this.getSide(getFacing()).isSolid()) {
-                this.level.useBreakOn(this);
+                this.level.useBreakOn(this, null, null, true);
                 return type;
             }
         }

@@ -107,11 +107,11 @@ public class BlockCactus extends BlockTransparentMeta {
         if (type == Level.BLOCK_UPDATE_NORMAL) {
             Block down = down();
             if (down.getId() != SAND && down.getId() != CACTUS) {
-                this.getLevel().useBreakOn(this);
+                this.getLevel().useBreakOn(this, null, null, true);
             } else {
                 for (BlockFace side : BlockFace.Plane.HORIZONTAL) {
                     if (!getSide(side).canBeFlowedInto()) {
-                        this.getLevel().useBreakOn(this);
+                        this.getLevel().useBreakOn(this, null, null, true);
                     }
                 }
             }

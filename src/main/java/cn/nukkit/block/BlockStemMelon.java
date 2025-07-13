@@ -1,6 +1,9 @@
 package cn.nukkit.block;
 
 import cn.nukkit.Server;
+import cn.nukkit.block.custom.properties.BlockProperties;
+import cn.nukkit.block.properties.BlockPropertiesHelper;
+import cn.nukkit.block.properties.VanillaProperties;
 import cn.nukkit.event.block.BlockGrowEvent;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.ItemSeedsMelon;
@@ -9,10 +12,6 @@ import cn.nukkit.math.BlockFace;
 import cn.nukkit.math.BlockFace.Plane;
 import cn.nukkit.utils.Faceable;
 import cn.nukkit.utils.Utils;
-
-import cn.nukkit.block.custom.properties.BlockProperties;
-import cn.nukkit.block.properties.VanillaProperties;
-import cn.nukkit.block.properties.BlockPropertiesHelper;
 
 /**
  * Created by Pub4Game on 15.01.2016.
@@ -63,7 +62,7 @@ public class BlockStemMelon extends BlockCrops implements Faceable, BlockPropert
     public int onUpdate(int type) {
         if (type == Level.BLOCK_UPDATE_NORMAL) {
             if (this.down().getId() != FARMLAND) {
-                this.getLevel().useBreakOn(this);
+                this.getLevel().useBreakOn(this, null, null, true);
                 return Level.BLOCK_UPDATE_NORMAL;
             }
         } else if (type == Level.BLOCK_UPDATE_RANDOM) {

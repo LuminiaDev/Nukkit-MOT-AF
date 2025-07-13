@@ -40,7 +40,7 @@ public class BlockTripWireHook extends BlockFlowable {
     public int onUpdate(int type) {
         if (type == Level.BLOCK_UPDATE_NORMAL) {
             if (!isSupportValid(this.getSide(this.getFacing().getOpposite()))) {
-                this.level.useBreakOn(this);
+                this.level.useBreakOn(this, null, null, true);
             }
 
             return type;

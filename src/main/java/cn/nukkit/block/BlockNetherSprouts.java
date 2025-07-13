@@ -55,7 +55,7 @@ public class BlockNetherSprouts extends BlockRoots {
                 return 0;
             }
 
-            level.useBreakOn(this);
+            level.useBreakOn(this, null, null, true);
             return Level.BLOCK_UPDATE_NORMAL;
         }
 

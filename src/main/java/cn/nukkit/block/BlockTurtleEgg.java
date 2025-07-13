@@ -79,7 +79,7 @@ public class BlockTurtleEgg extends BlockTransparentMeta {
     public int onUpdate(int type) {
         if (type == Level.BLOCK_UPDATE_NORMAL) {
             if (!canStayOnFullSolid(this.down())) {
-                this.getLevel().useBreakOn(this);
+                this.getLevel().useBreakOn(this, null, null, true);
                 return Level.BLOCK_UPDATE_NORMAL;
             }
         }

@@ -229,7 +229,7 @@ public abstract class BlockDoor extends BlockTransparentMeta implements Faceable
 
                 if (up instanceof BlockDoor) {
                     this.getLevel().setBlock(up, Block.get(BlockID.AIR), false);
-                    this.getLevel().useBreakOn(this, getToolType() == ItemTool.TYPE_PICKAXE ? Item.get(ItemID.DIAMOND_PICKAXE) : Item.get(Item.WOODEN_PICKAXE)); // Drop iron doors
+                    this.getLevel().useBreakOn(this, getToolType() == ItemTool.TYPE_PICKAXE ? Item.get(ItemID.DIAMOND_PICKAXE) : Item.get(Item.WOODEN_PICKAXE), null, true); // Drop iron doors
                 }
 
                 return Level.BLOCK_UPDATE_NORMAL;

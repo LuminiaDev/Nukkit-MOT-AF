@@ -52,14 +52,14 @@ public class BlockSeaPickle extends BlockFlowable {
         if (type == Level.BLOCK_UPDATE_NORMAL){
             Block down = this.down();
             if (!down.isSolid() || down.getId() == MAGMA) {
-                this.getLevel().useBreakOn(this);
+                this.getLevel().useBreakOn(this, null, null, true);
                 return type;
             }
 
             Block layer1 = getLevelBlockAtLayer(1);
             if (layer1 instanceof BlockWater) {
                 if (this.isDead() || layer1.getDamage() != 0 && layer1.getDamage() != 8) {
-                    this.getLevel().useBreakOn(this);
+                    this.getLevel().useBreakOn(this, null, null, true);
                     return type;
                 }
             } else if (!this.isDead()) {

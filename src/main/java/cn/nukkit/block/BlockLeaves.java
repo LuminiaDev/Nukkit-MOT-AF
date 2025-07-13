@@ -145,7 +145,7 @@ public class BlockLeaves extends BlockTransparentMeta {
                 setCheckDecay(false);
                 getLevel().setBlock(this, this, false, false);
             } else {
-                getLevel().useBreakOn(this);
+                getLevel().useBreakOn(this, null, null, true);
             }
 
             return Level.BLOCK_UPDATE_RANDOM;

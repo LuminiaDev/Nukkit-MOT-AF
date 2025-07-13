@@ -75,13 +75,13 @@ public class BlockKelp extends BlockFlowable {
             int waterDamage = 0;
             if (!(blockLayer1 instanceof BlockIceFrosted) &&
                     (!(blockLayer1 instanceof BlockWater) || ((waterDamage = blockLayer1.getDamage()) != 0 && waterDamage != 8))) {
-                this.getLevel().useBreakOn(this);
+                this.getLevel().useBreakOn(this, null, null, true);
                 return type;
             }
         
             Block down = this.down();
             if ((!down.isSolid() && down.getId() != BLOCK_KELP) || down.getId() == MAGMA || down.getId() == ICE || down.getId() == SOUL_SAND) {
-                this.getLevel().useBreakOn(this);
+                this.getLevel().useBreakOn(this, null, null, true);
                 return type;
             }
         

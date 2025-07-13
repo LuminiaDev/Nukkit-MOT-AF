@@ -60,7 +60,7 @@ public class BlockCoralFan extends BlockFlowable implements Faceable {
         if (type == Level.BLOCK_UPDATE_NORMAL) {
             Block side = this.getSide(this.getRootsFace());
             if (!side.isSolid() || side.getId() == MAGMA || side.getId() == SOUL_SAND) {
-                this.getLevel().useBreakOn(this);
+                this.getLevel().useBreakOn(this, null, null, true);
             } else {
                 this.getLevel().scheduleUpdate(this, 60 + ThreadLocalRandom.current().nextInt(40));
             }
@@ -68,7 +68,7 @@ public class BlockCoralFan extends BlockFlowable implements Faceable {
         } else if (type == Level.BLOCK_UPDATE_SCHEDULED) {
             Block side = this.getSide(this.getRootsFace());
             if (side.getId() == ICE) {
-                this.getLevel().useBreakOn(this);
+                this.getLevel().useBreakOn(this, null, null, true);
                 return type;
             }
 

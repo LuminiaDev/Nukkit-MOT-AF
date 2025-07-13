@@ -54,7 +54,7 @@ public class BlockSeagrass extends BlockFlowable {
             int damage;
             if (!(blockLayer1 instanceof BlockIceFrosted)
                     && (!(blockLayer1 instanceof BlockWater) || ((damage = blockLayer1.getDamage()) != 0 && damage != 8))) {
-                this.getLevel().useBreakOn(this);
+                this.getLevel().useBreakOn(this, null, null, true);
                 return Level.BLOCK_UPDATE_NORMAL;
             }
             
@@ -62,18 +62,18 @@ public class BlockSeagrass extends BlockFlowable {
             damage = this.getDamage();
             if (damage == 0 || damage == 2) {
                 if (!down.isSolid() || down.getId() == MAGMA || down.getId() == SOUL_SAND) {
-                    this.getLevel().useBreakOn(this);
+                    this.getLevel().useBreakOn(this, null, null, true);
                     return Level.BLOCK_UPDATE_NORMAL;
                 }
                 
                 if (damage == 2) {
                     Block up = up();
                     if (up.getId() != getId() || up.getDamage() != 1) {
-                        this.getLevel().useBreakOn(this);
+                        this.getLevel().useBreakOn(this, null, null, true);
                     }
                 }
             } else if (down.getId() != getId() || down.getDamage() != 2) {
-                this.getLevel().useBreakOn(this);
+                this.getLevel().useBreakOn(this, null, null, true);
             }
             
             return Level.BLOCK_UPDATE_NORMAL;

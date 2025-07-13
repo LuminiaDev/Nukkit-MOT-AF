@@ -107,7 +107,7 @@ public abstract class BlockVinesNether extends BlockTransparentMeta {
                 return Level.BLOCK_UPDATE_RANDOM;
             case Level.BLOCK_UPDATE_NORMAL:
                 if (!this.isSupportValid()) {
-                    this.getLevel().useBreakOn(this);
+                    this.getLevel().useBreakOn(this, null, null, true);
                 }
                 return Level.BLOCK_UPDATE_NORMAL;
             default:

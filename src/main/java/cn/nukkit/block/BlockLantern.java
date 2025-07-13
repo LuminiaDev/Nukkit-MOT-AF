@@ -81,10 +81,10 @@ public class BlockLantern extends BlockFlowable {
         if (type == Level.BLOCK_UPDATE_NORMAL) {
             if (this.getDamage() == 0) {
                 if (!this.isBlockUnderValid()) {
-                    level.useBreakOn(this);
+                    level.useBreakOn(this, null, null, true);
                 }
             } else if (!this.isBlockAboveValid()) {
-                level.useBreakOn(this);
+                level.useBreakOn(this, null, null, true);
             }
             return type;
         }

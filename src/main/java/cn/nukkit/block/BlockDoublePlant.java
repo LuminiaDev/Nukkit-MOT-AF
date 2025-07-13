@@ -70,7 +70,7 @@ public class BlockDoublePlant extends BlockFlowable {
                 // Bottom
                 Block down = this.down();
                 if ((down.isTransparent() && down.getId() != FARMLAND) || this.up().getId() != DOUBLE_PLANT) {
-                    this.getLevel().useBreakOn(this);
+                    this.getLevel().useBreakOn(this, null, null, true);
                     return Level.BLOCK_UPDATE_NORMAL;
                 }
             }
@@ -99,7 +99,7 @@ public class BlockDoublePlant extends BlockFlowable {
         if ((this.getDamage() & TOP_HALF_BITMASK) == TOP_HALF_BITMASK) { // Top half
             Block down = down();
             if (down instanceof BlockDoublePlant) {
-                this.getLevel().useBreakOn(down);
+                this.getLevel().useBreakOn(down, null, null, true);
             }
         } else {
             this.getLevel().setBlock(this, Block.get(BlockID.AIR), true, true);

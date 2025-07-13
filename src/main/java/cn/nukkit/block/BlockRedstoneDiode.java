@@ -91,7 +91,7 @@ public abstract class BlockRedstoneDiode extends BlockFlowable implements Faceab
                 return 0;
             }
             if (type == Level.BLOCK_UPDATE_NORMAL && this.getSide(BlockFace.DOWN).isTransparent() && !(this.down() instanceof BlockSlab)) {
-                this.level.useBreakOn(this);
+                this.level.useBreakOn(this, null, null, true);
                 return Level.BLOCK_UPDATE_NORMAL;
             } else {
                 this.updateState();

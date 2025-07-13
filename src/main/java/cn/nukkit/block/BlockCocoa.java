@@ -116,7 +116,7 @@ public class BlockCocoa extends BlockTransparentMeta implements Faceable {
             Block side = this.getSide(BlockFace.fromIndex(faces2[this.getDamage()]));
 
             if (side.getId() != Block.WOOD && (side.getDamage() & 0x03) != BlockWood.JUNGLE) {
-                this.getLevel().useBreakOn(this);
+                this.getLevel().useBreakOn(this, null, null, true);
                 return Level.BLOCK_UPDATE_NORMAL;
             }
         } else if (type == Level.BLOCK_UPDATE_RANDOM) {

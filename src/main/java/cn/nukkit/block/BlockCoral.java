@@ -41,7 +41,7 @@ public class BlockCoral extends BlockFlowable {
         if (type == Level.BLOCK_UPDATE_NORMAL) {
             Block down = this.down();
             if (!down.isSolid()) {
-                this.getLevel().useBreakOn(this);
+                this.getLevel().useBreakOn(this, null, null, true);
             } else if (!this.isDead()) {
                 this.getLevel().scheduleUpdate(this, 60 + ThreadLocalRandom.current().nextInt(40));
             }

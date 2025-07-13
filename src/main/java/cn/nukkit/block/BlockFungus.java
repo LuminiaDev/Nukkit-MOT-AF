@@ -26,7 +26,7 @@ public abstract class BlockFungus extends BlockFlowable {
     @Override
     public int onUpdate(int type) {
         if (type == Level.BLOCK_UPDATE_NORMAL && !isValidSupport(down())) {
-            level.useBreakOn(this);
+            level.useBreakOn(this, null, null, true);
             return type;
         }
 
@@ -47,7 +47,7 @@ public abstract class BlockFungus extends BlockFlowable {
 
         Block down = down();
         if (!isValidSupport(down)) {
-            level.useBreakOn(this);
+            level.useBreakOn(this, null, null, true);
             return true;
         }
 

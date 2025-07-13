@@ -57,7 +57,7 @@ public class BlockDeadBush extends BlockFlowable {
     public int onUpdate(int type) {
         if (type == Level.BLOCK_UPDATE_NORMAL) {
             if (this.down().isTransparent()) {
-                this.getLevel().useBreakOn(this);
+                this.getLevel().useBreakOn(this, null, null, true);
 
                 return Level.BLOCK_UPDATE_NORMAL;
             }

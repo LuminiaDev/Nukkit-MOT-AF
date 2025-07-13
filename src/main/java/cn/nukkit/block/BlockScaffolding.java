@@ -224,7 +224,7 @@ public class BlockScaffolding extends BlockFallable {
             this.getLevel().setBlock(this, this, true, true);
             return type;
         } else if (type == Level.BLOCK_UPDATE_SCHEDULED) {
-            this.getLevel().useBreakOn(this);
+            this.getLevel().useBreakOn(this, null, null, true);
             return type;
         }
 

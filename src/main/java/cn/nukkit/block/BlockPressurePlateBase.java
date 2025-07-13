@@ -60,7 +60,7 @@ public abstract class BlockPressurePlateBase extends BlockFlowable {
         if (type == Level.BLOCK_UPDATE_NORMAL) {
             Block down = this.down();
             if (!isSupportValid(this.down())) {
-                this.level.useBreakOn(this, Item.get(Item.WOODEN_PICKAXE));
+                this.level.useBreakOn(this, Item.get(Item.WOODEN_PICKAXE), null, true);
             }
         } else if (type == Level.BLOCK_UPDATE_SCHEDULED) {
             int power = this.getRedstonePower();

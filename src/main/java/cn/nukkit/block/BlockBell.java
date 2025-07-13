@@ -282,7 +282,7 @@ public class BlockBell extends BlockTransparentMeta implements Faceable, BlockEn
     public int onUpdate(int type) {
         if (type == Level.BLOCK_UPDATE_NORMAL) {
             if (!checkSupport()) {
-                this.level.useBreakOn(this);
+                this.level.useBreakOn(this, null, null, true);
             }
             return type;
         } else if (type == Level.BLOCK_UPDATE_REDSTONE) {
