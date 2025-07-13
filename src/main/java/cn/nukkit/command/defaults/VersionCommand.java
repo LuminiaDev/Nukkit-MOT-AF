@@ -42,11 +42,13 @@ public class VersionCommand extends VanillaCommand {
         if (args.length == 0 || !sender.hasPermission("nukkit.command.version.plugins")) {
             final String branch = Nukkit.getBranch();
 
-            sender.sendMessage("§e#########################################\n§cNukkit§3-§dMOT\n§6Build: §b" + branch + '/' + Nukkit.VERSION.substring(4) + "\n§6Multiversion: §bUp to version " + ProtocolInfo.MINECRAFT_VERSION_NETWORK + "\n§e#########################################");
+            sender.sendMessage("§bNukkit-MOT special version for AmokLeaf server" +
+                    "\n" + "§fBuild: §7" + branch + '/' + Nukkit.VERSION.substring(4) +
+                    "\n" + "§fSupports version up to: " + ProtocolInfo.MINECRAFT_VERSION);
 
             if (sender.isOp()) {
                 if (!branch.equals("master") || Nukkit.VERSION.equals("git-null")) {
-                    sender.sendMessage("§c[Nukkit-MOT] §aYou are using a development build, consider updating");
+                    sender.sendMessage("§eYou are using a development build, consider updating");
                     return true;
                 }
 
@@ -70,10 +72,10 @@ public class VersionCommand extends VanillaCommand {
             return true;
         }
 
-        final String pluginName = String.join(" ", args);
+        String pluginName = String.join(" ", args);
         Plugin exactPlugin = sender.getServer().getPluginManager().getPlugin(pluginName);
-        boolean found = false;
 
+        boolean found = false;
         if (exactPlugin == null) {
             final String lowerName = pluginName.toLowerCase(Locale.ROOT);
             for (Plugin p : sender.getServer().getPluginManager().getPlugins().values()) {
