@@ -20,11 +20,13 @@ public class BlockNaturalBreakEvent extends BlockEvent implements Cancellable {
 
     protected Item item;
     protected Item[] drops;
-    protected int blockExp;
+    protected int dropExp;
 
-    public BlockNaturalBreakEvent(Block block, Item item, Item[] drops) {
+    public BlockNaturalBreakEvent(Block block, Item item, Item[] drops, int dropExp) {
         super(block);
+        this.item = item;
         this.drops = drops;
+        this.dropExp = dropExp;
     }
 
     public Item getItem() {
@@ -40,10 +42,10 @@ public class BlockNaturalBreakEvent extends BlockEvent implements Cancellable {
     }
 
     public int getDropExp() {
-        return this.blockExp;
+        return this.dropExp;
     }
 
-    public void setDropExp(int blockExp) {
-        this.blockExp = blockExp;
+    public void setDropExp(int dropExp) {
+        this.dropExp = dropExp;
     }
 }

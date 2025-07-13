@@ -2525,7 +2525,7 @@ public class Level implements ChunkManager, Metadatable {
             drops = target.getDrops(null, item);
         }
 
-        BlockNaturalBreakEvent ev = new BlockNaturalBreakEvent(target, item, drops);
+        BlockNaturalBreakEvent ev = new BlockNaturalBreakEvent(target, item, drops, dropExp);
         ev.call();
 
         if (ev.isCancelled()) {
