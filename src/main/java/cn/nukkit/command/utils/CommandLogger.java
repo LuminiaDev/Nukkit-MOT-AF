@@ -65,8 +65,7 @@ public record CommandLogger(Command command,
      */
     public CommandLogger addSuccess(String key, String... params) {
         if (TextFormat.getLastColors(key).isEmpty()) {
-            if (Server.getInstance().getLanguage().internalGet(key) != null) key = TextFormat.WHITE + "%" + key;
-            else key = TextFormat.WHITE + key;
+            key = TextFormat.WHITE + "%" + key;
         }
 
         this.outputContainer.getMessages().add(new CommandOutputMessage(key, params));
