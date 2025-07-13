@@ -51,23 +51,6 @@ public class VersionCommand extends VanillaCommand {
                     sender.sendMessage("§eYou are using a development build, consider updating");
                     return true;
                 }
-
-                CompletableFuture.runAsync(() -> {
-                    try {
-                        URLConnection request = new URL(Nukkit.BRANCH).openConnection();
-                        request.connect();
-                        InputStreamReader content = new InputStreamReader((InputStream) request.getContent());
-                        String latest = "git-" + JsonParser.parseReader(content).getAsJsonObject().get("sha").getAsString().substring(0, 7);
-                        content.close();
-
-                        if (Nukkit.VERSION.equals(latest)) {
-                            sender.sendMessage("§c[Nukkit-MOT] §aYou are running the latest version.");
-                        } else {
-                            sender.sendMessage("§c[Nukkit-MOT][Update] §eThere is a new build of §cNukkit§3-§dMOT §eavailable! Current: " + Nukkit.VERSION + ", latest: " + latest);
-                        }
-                    } catch (Exception ignore) {
-                    }
-                });
             }
             return true;
         }
