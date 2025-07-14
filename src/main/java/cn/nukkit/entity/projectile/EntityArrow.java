@@ -30,7 +30,6 @@ public class EntityArrow extends EntitySlenderProjectile {
     public static final int DATA_SOURCE_ID = 17;
 
     protected int pickupMode;
-    protected boolean critical;
     protected boolean isFullEffect;
 
     protected Int2ObjectMap<Effect> mobEffects;
@@ -105,13 +104,11 @@ public class EntityArrow extends EntitySlenderProjectile {
     }
 
     public void setCritical(boolean value) {
-        //this.setDataFlag(DATA_FLAGS, DATA_FLAG_CRITICAL, value);
-        this.critical = value;
+        this.setDataFlag(Entity.DATA_FLAGS, Entity.DATA_FLAG_CRITICAL, value, true);
     }
 
     public boolean isCritical() {
-        //return this.getDataFlag(DATA_FLAGS, DATA_FLAG_CRITICAL);
-        return this.critical;
+        return this.getDataFlag(Entity.DATA_FLAGS, Entity.DATA_FLAG_CRITICAL);
     }
 
     @Override

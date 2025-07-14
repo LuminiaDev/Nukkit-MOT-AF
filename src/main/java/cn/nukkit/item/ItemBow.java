@@ -113,10 +113,13 @@ public class ItemBow extends ItemTool {
 
         double p = (double) ticksUsed / 20;
 
-        double f = Math.min((p * p + p * 2) / 3, 1) * 2.8;
-        EntityShootBowEvent entityShootBowEvent = new EntityShootBowEvent(player, this, new EntityArrow(player.chunk, nbt, player, f == 2), f);
+        final double maxForce = 3.5;
+        double force = Math.min((p * p + p * 2) / 3, 1) * maxForce;
 
-        if (f < 0.1 || ticksUsed < 3) {
+        EntityArrow arrow = new EntityArrow(player.chunk, nbt, player, force == maxForce);
+        EntityShootBowEvent entityShootBowEvent = new EntityShootBowEvent(player, this, arrow, force);
+
+        if (force < 0.1 || ticksUsed < 3) {
             entityShootBowEvent.setCancelled();
         }
 

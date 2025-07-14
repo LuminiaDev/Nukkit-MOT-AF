@@ -175,7 +175,7 @@ public class ItemCrossbow extends ItemBow {
                             .putByte("auxValue", chargedItem.getDamage())
                             .putCompound("item", itemTag);
 
-                    EntityArrow arrow = new EntityArrow(player.chunk, nbt, player, false);
+                    EntityArrow arrow = new EntityArrow(player.chunk, nbt, player, true);
                     arrow.piercing = penetrationLevel;
                     if (chargedItem.getDamage() != ItemArrow.NORMAL_ARROW) {
                         Potion potion = Potion.getPotion(chargedItem.getDamage() - ItemArrow.TIPPED_ARROW);
