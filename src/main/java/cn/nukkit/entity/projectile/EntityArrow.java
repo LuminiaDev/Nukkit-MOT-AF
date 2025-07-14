@@ -82,6 +82,7 @@ public class EntityArrow extends EntitySlenderProjectile {
     protected void initEntity() {
         super.initEntity();
 
+        this.setCritical(this.namedTag.getBoolean("crit"));
         this.pickupMode = this.namedTag.contains("pickup") ? this.namedTag.getByte("pickup") : PICKUP_ANY;
         this.isFullEffect = this.namedTag.getBoolean("isFullEffect");
 
@@ -153,6 +154,7 @@ public class EntityArrow extends EntitySlenderProjectile {
     public void saveNBT() {
         super.saveNBT();
 
+        this.namedTag.putBoolean("crit", this.isCritical());
         this.namedTag.putByte("pickup", this.pickupMode);
         this.namedTag.putBoolean("isFullEffect", this.isFullEffect);
 
