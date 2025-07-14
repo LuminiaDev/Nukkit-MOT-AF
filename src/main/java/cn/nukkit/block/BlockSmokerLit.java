@@ -2,6 +2,7 @@ package cn.nukkit.block;
 
 import cn.nukkit.Player;
 import cn.nukkit.blockentity.BlockEntity;
+import cn.nukkit.blockentity.BlockEntityFurnace;
 import cn.nukkit.blockentity.BlockEntitySmoker;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.ItemBlock;
@@ -10,6 +11,7 @@ import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.nbt.tag.ListTag;
 import cn.nukkit.nbt.tag.StringTag;
 import cn.nukkit.nbt.tag.Tag;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -31,6 +33,18 @@ public class BlockSmokerLit extends BlockFurnaceBurning {
     @Override
     public String getName() {
         return "Lit Smoker";
+    }
+
+    @NotNull
+    @Override
+    public Class<? extends BlockEntityFurnace> getBlockEntityClass() {
+        return BlockEntitySmoker.class;
+    }
+
+    @NotNull
+    @Override
+    public String getBlockEntityType() {
+        return BlockEntity.SMOKER;
     }
 
     @Override
