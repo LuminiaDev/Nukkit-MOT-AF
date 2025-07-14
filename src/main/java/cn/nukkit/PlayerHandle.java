@@ -175,6 +175,14 @@ public final class PlayerHandle {
         player.tradingTransaction = tradingTransaction;
     }
 
+    public GrindstoneTransaction getGrindstoneTransaction() {
+        return player.grindstoneTransaction;
+    }
+
+    public void setGrindstoneTransaction(GrindstoneTransaction grindstoneTransaction) {
+        player.grindstoneTransaction = grindstoneTransaction;
+    }
+
     public long getRandomClientId() {
         return player.randomClientId;
     }

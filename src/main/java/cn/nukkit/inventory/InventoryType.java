@@ -10,7 +10,8 @@ public enum InventoryType {
     ENDER_CHEST(27, "Ender Chest", 0), //27 CONTAINER
     DOUBLE_CHEST(54, "Double Chest", 0), //27 + 27 CONTAINER
     PLAYER(40, "Player", -1), //36 CONTAINER, 4 ARMOR
-    FURNACE(3, "Furnace", 2), //1 INPUT/OUTPUT, 1 FUEL
+    FURNACE(3, "Furnace", 2), //1 INPUT/OUTPUT, 1 FUEL,
+    GRINDSTONE(3, "Grindstone", 26),
     BLAST_FURNACE(3, "Blast Furnace", 27),  //1 INPUT/OUTPUT, 1 FUEL
     SMOKER(3, "Smoker", 28), //1 INPUT/OUTPUT, 1 FUEL
     CAMPFIRE(4, "Campfire", -1),

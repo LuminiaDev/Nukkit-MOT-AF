@@ -1,11 +1,14 @@
 package cn.nukkit.block;
 
 import cn.nukkit.Player;
+import cn.nukkit.inventory.GrindstoneInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.ItemBlock;
+import cn.nukkit.level.Level;
 import cn.nukkit.math.BlockFace;
 import cn.nukkit.utils.BlockColor;
 import cn.nukkit.utils.Faceable;
+import org.jetbrains.annotations.NotNull;
 
 public class BlockGrindstone extends BlockTransparentMeta implements Faceable {
 
@@ -76,6 +79,17 @@ public class BlockGrindstone extends BlockTransparentMeta implements Faceable {
     }
 
     @Override
+    public int onUpdate(int type) {
+        if (type == Level.BLOCK_UPDATE_NORMAL) {
+            if (!checkSupport()) {
+                this.level.useBreakOn(this, Item.get(Item.DIAMOND_PICKAXE), null, true);
+            }
+            return type;
+        }
+        return 0;
+    }
+
+    @Override
     public boolean place(Item item, Block block, Block target, BlockFace face, double fx, double fy, double fz, Player player) {
         if (block.getId() != AIR && block.canBeReplaced()) {
             face = BlockFace.UP;
@@ -132,5 +146,18 @@ public class BlockGrindstone extends BlockTransparentMeta implements Faceable {
         }
 
         return false;
+    }
+
+    @Override
+    public boolean canBeActivated() {
+        return true;
+    }
+
+    @Override
+    public boolean onActivate(@NotNull Item item, Player player) {
+        if (player != null) {
+            player.addWindow(new GrindstoneInventory(player.getUIInventory(), this), Player.GRINDSTONE_WINDOW_ID);
+        }
+        return true;
     }
 }

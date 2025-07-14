@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.event.inventory.CraftItemEvent;
 import cn.nukkit.inventory.*;
+import cn.nukkit.inventory.special.RepairItemRecipe;
 import cn.nukkit.inventory.transaction.action.InventoryAction;
 import cn.nukkit.inventory.transaction.action.SlotChangeAction;
 import cn.nukkit.item.Item;
@@ -107,6 +108,15 @@ public class CraftingTransaction extends InventoryTransaction {
                 SmithingRecipe smithingRecipe = smithingInventory.matchRecipe();
                 if (smithingRecipe != null && this.primaryOutput.equals(smithingRecipe.getFinalResult(smithingInventory.getEquipment(), smithingInventory.getTemplate()), true, true)) {
                     setTransactionRecipe(smithingRecipe);
+                }
+            }
+        } else if (craftingType == Player.CRAFTING_GRINDSTONE) {
+            inventory = source.getWindowById(Player.GRINDSTONE_WINDOW_ID);
+            if (inventory instanceof GrindstoneInventory grindstone) {
+                addInventory(grindstone);
+                if (grindstone.updateResult(false) && this.primaryOutput.equals(grindstone.getResult(), true, true)) {
+                    setTransactionRecipe(new RepairRecipe(InventoryType.GRINDSTONE, this.primaryOutput, this.inputs));
+                    grindstone.setResult(Item.get(0), false);
                 }
             }
         } else {

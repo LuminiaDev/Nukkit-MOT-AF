@@ -120,6 +120,20 @@ public class PlayerUIInventory extends BaseInventory {
     }
 
     @Override
+    public void onSlotChange(int index, Item before, boolean send) {
+        if (player.craftingType == Player.CRAFTING_GRINDSTONE) {
+            if (index >= GrindstoneInventory.OFFSET) {
+                Inventory inventory = player.getWindowById(Player.GRINDSTONE_WINDOW_ID);
+                if (inventory instanceof GrindstoneInventory && (index == 50 || index - GrindstoneInventory.OFFSET < inventory.getSize())) {
+                    inventory.onSlotChange(index == 50 ? 2 : index - GrindstoneInventory.OFFSET, before, send);
+                }
+            }
+        } else {
+            super.onSlotChange(index, before, send);
+        }
+    }
+
+    @Override
     public int getSize() {
         return 51;
     }

@@ -232,6 +232,24 @@ public class NetworkInventoryAction {
                             this.windowId = Player.SMITHING_WINDOW_ID;
                             this.inventorySlot = 2;
                             break;
+                        //124:16 -> 5:0
+                        case GrindstoneInventory.GRINDSTONE_EQUIPMENT_UI_SLOT:
+                            if (player.getWindowById(Player.GRINDSTONE_WINDOW_ID) == null) {
+                                player.getServer().getLogger().error("Player " + player.getName() + " does not have grindstone window open");
+                                return null;
+                            }
+                            this.windowId = Player.GRINDSTONE_WINDOW_ID;
+                            this.inventorySlot = 0;
+                            break;
+                        //124:17 -> 5:1
+                        case GrindstoneInventory.GRINDSTONE_INGREDIENT_UI_SLOT:
+                            if (player.getWindowById(Player.GRINDSTONE_WINDOW_ID) == null) {
+                                player.getServer().getLogger().error("Player " + player.getName() + " does not have grindstone window open");
+                                return null;
+                            }
+                            this.windowId = Player.GRINDSTONE_WINDOW_ID;
+                            this.inventorySlot = 1;
+                            break;
                         //124:4 -> 500:0
                         case TradeInventory.TRADE_INPUT1_UI_SLOT:
                             if (player.getWindowById(Player.TRADE_WINDOW_ID) == null) {

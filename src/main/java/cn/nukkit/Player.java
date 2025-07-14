@@ -144,6 +144,7 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
     public static final int CRAFTING_ANVIL = 2;
     public static final int CRAFTING_ENCHANT = 3;
     public static final int CRAFTING_BEACON = 4;
+    public static final int CRAFTING_GRINDSTONE = 1000;
     public static final int CRAFTING_SMITHING = 1003;
     public static final int CRAFTING_LOOM = 1004;
 
@@ -219,6 +220,7 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
     protected LoomTransaction loomTransaction;
     protected SmithingTransaction smithingTransaction;
     protected TradingTransaction tradingTransaction;
+    protected GrindstoneTransaction grindstoneTransaction;
 
     protected long randomClientId;
 
@@ -4387,7 +4389,24 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
                     return;
                 } else if (this.protocol >= ProtocolInfo.v1_16_0 && transactionPacket.isRepairItemPart) {
                     Sound sound = null;
-                    if (SmithingTransaction.checkForItemPart(actions)) {
+                    if (GrindstoneTransaction.checkForItemPart(actions)) {
+                        if (playerHandle.getGrindstoneTransaction() == null) {
+                            playerHandle.setGrindstoneTransaction(new GrindstoneTransaction(this, actions));
+                        } else {
+                            for (InventoryAction action : actions) {
+                                playerHandle.getGrindstoneTransaction().addAction(action);
+                            }
+                        }
+                        if (playerHandle.getGrindstoneTransaction().canExecute()) {
+                            try {
+                                if (playerHandle.getGrindstoneTransaction().execute()) {
+                                    sound = Sound.BLOCK_GRINDSTONE_USE;
+                                }
+                            } finally {
+                                playerHandle.setGrindstoneTransaction(null);
+                            }
+                        }
+                    } else if (SmithingTransaction.checkForItemPart(actions)) {
                         if (this.smithingTransaction == null) {
                             this.smithingTransaction = new SmithingTransaction(this, actions);
                         } else {
