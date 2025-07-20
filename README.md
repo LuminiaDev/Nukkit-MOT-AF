@@ -9,7 +9,9 @@
   <a href="/docs/README_zh.md"><img alt="中文" src="https://img.shields.io/badge/中文-d9d9d9"></a>
 </p>
 
-
+> [!IMPORTANT]
+> This project is abandoned! Use Lumi:  
+> https://github.com/KoshakMineDEV/Lumi/
 
 ------
 
